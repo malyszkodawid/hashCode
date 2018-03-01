@@ -1,10 +1,10 @@
+import glob
 
 
+def main():
 
-def shit():
-
-	print('Shit!')
+	input_files = glob.glob("inputs/*.in")
 
 
 if __name__ == "__main__":
-	shit()
+	main()
