@@ -36,7 +36,13 @@ def read_data(path):
 
 def solve(path):
 
-	data = read_data(path)
+	d = read_data(path)
+
+	
+
+	result = calculate_result(data)
+	
+	write_result(result, "/output/%s" % os.path.filename(path))
 
 
 
