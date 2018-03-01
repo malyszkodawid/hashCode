@@ -3,18 +3,36 @@ import glob
 import numpy as np
 
 
+
+class Data(object):
+
+	def __init__(self, header, array):
+
+		self.header = header
+
+		self.R, self.C, self.F, self.N, self.B, self.T = header
+
+		self.data = np.array(array)
+
 def read_data(path):
+
+	data_array = []
+	header = []
 
 	with open(path, 'r') as f:
 		
 		for i, row in enumerate(f):
 
+			row = list(map(lambda x: int(x), row.split(' ')))
+
 			# read first line
 			if i == 0:
-				R, C, F, N, B, T = map(lambda x: int(x), row.split(' '))
-				print(C)
-				break
+				header = row
+				continue
 
+			data_array.append(row)
+
+	return Data(header, data_array)
 
 def solve(path):
 
