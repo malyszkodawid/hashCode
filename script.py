@@ -40,6 +40,18 @@ def solve(path):
 
 
 
+def write_result(d, output_path):
+
+	with open(output_path, 'w') as f:
+		for car, rides in d.items():
+			f.write(str(car))
+			for r in rides:
+				f.write(' ' + str(r))
+			f.write('\n')		
+
+
+
+
 def run_all():
 
 	input_files = glob.glob("inputs/*.in")
