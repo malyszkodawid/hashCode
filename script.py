@@ -46,13 +46,7 @@ def car_to_ride_score(car, ride, bonus):
 	ride_length = dist((ride[0], ride[1]), (ride[2], ride[3]))
 	start_moment = car[2] + dist(car[1], (ride[0], ride[1]))
 	
-	if start_moment <= ride[4]:
-		return (ride_length + bonus, start_moment + ride_length)
-
-	if start_moment + ride_length <= ride[5]:
-		return (ride_length, start_moment + ride_length)
-
-	return (0, start_moment + ride_length)
+	return (ride[4] - start_moment, start_moment + ride_length)
 
 
 def emil(data):
@@ -69,12 +63,13 @@ def emil(data):
 	for i, r in enumerate(rides):
 		# print(i)
 		best_car = 0
-		best_car_distance = (-math.inf, 0)
+		best_car_distance = (-math.inf, 0, 0)
 		for c in cars:
 			d = car_to_ride_score(c, r, data.B)
 			if d[0] > best_car_distance[0]:
 				best_car_distance = d
 				best_car = c[0]
+
 		
 		# assign car
 		try:
@@ -83,6 +78,8 @@ def emil(data):
 		except KeyError:
 			assign[best_car] = [i]
 			cars[best_car] = (best_car, (r[2], r[3]), best_car_distance[1])
+
+		# print(cars)
 
 	return assign
 
